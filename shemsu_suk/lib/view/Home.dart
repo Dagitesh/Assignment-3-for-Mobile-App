@@ -25,34 +25,28 @@ class _itemState extends State<item> {
           style: TextStyle(fontStyle: FontStyle.italic),
         ),
         foregroundColor: Color.fromARGB(255, 255, 255, 255),
-        backgroundColor: Color.fromARGB(255, 108, 93, 241),
+        backgroundColor: Color.fromARGB(255, 132, 121, 236),
         actions: [
-          ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(0, 248, 248, 248)),
+          IconButton(
+            icon: Icon(
+              Icons.account_circle,
+              color: Color.fromARGB(255, 17, 221, 51),
+            ),
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ProfilePage()));
             },
-            icon: Icon(
-              Icons.account_circle,
-              color: Colors.amberAccent,
-            ),
-            label: Text(''),
           ),
-          ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(0, 255, 255, 255)),
+          IconButton(
+            icon: Icon(
+              Icons.shopping_cart_rounded,
+              color: Color.fromARGB(255, 17, 221, 51),
+            ),
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => CartPage()));
+                  context, MaterialPageRoute(builder: (context) => cart()));
             },
-            icon: Icon(
-              Icons.shopping_cart_checkout,
-              color: Colors.amberAccent,
-            ),
-            label: Text(''),
-          )
+          ),
         ],
       ),
       backgroundColor: Color.fromARGB(255, 161, 233, 199),
@@ -70,7 +64,7 @@ class _itemState extends State<item> {
                   padding: const EdgeInsets.only(top: 150),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(252, 81, 83, 172),
+                          backgroundColor: Color.fromARGB(251, 102, 104, 202),
                           fixedSize: Size(150, 80)),
                       onPressed: () {
                         BlocProvider.of<itemBloc>(context)
@@ -97,17 +91,21 @@ class _itemState extends State<item> {
                       children: [
                         Center(
                           child: SizedBox(
+                            width: 360,
                             child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50.0),
+                              ),
                               color: Color.fromARGB(248, 255, 255, 255),
                               child: Padding(
-                                padding: const EdgeInsets.all(9.0),
+                                padding: const EdgeInsets.all(1.0),
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     SizedBox(
-                                      width: 200,
                                       child: Image.network(
                                         items.image,
+                                        width: 100,
                                         fit: BoxFit.fill,
                                       ),
                                     ),
@@ -139,30 +137,42 @@ class _itemState extends State<item> {
                                                       .1,
                                                   child: Text(
                                                     '${items.price}', // Replace with actual price
+                                                    // ignore: prefer_const_constructors
                                                     style: TextStyle(
                                                         fontSize: 16,
+                                                        // ignore: prefer_const_constructors
                                                         color: Color.fromARGB(
                                                             255, 7, 202, 209)),
                                                   ),
                                                 ),
                                                 SizedBox(height: 5),
-                                                ElevatedButton(
+                                                ElevatedButton.icon(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                          shape: CircleBorder(),
+                                                          padding: EdgeInsets
+                                                              .all(10),
+                                                          backgroundColor:
+                                                              Color.fromARGB(
+                                                                  255,
+                                                                  223,
+                                                                  40,
+                                                                  7),
+                                                          minimumSize:
+                                                              const Size(50, 8),
+                                                          alignment:
+                                                              Alignment.center,
+                                                          elevation: 10),
                                                   onPressed: () {
                                                     BlocProvider.of<itemBloc>(
                                                             context)
-                                                        .add(CartHistoryEvent(
-                                                            asbeza: items));
-                                                    // Implement add to cart functionality
+                                                        .add(
+                                                            PurchaseHistoryEvent(
+                                                                asbeza: items));
                                                   },
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                          primary:
-                                                              Color.fromARGB(
-                                                                  255,
-                                                                  199,
-                                                                  4,
-                                                                  4)),
-                                                  child: Text('Add to Zenbil'),
+                                                  icon: const Icon(
+                                                      Icons.add_shopping_cart),
+                                                  label: Text(""),
                                                 ),
                                               ],
                                             ),

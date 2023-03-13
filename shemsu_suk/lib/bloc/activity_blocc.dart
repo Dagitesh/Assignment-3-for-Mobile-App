@@ -10,14 +10,15 @@ import 'activity_state.dart';
 
 class itemBloc extends Bloc<itemEvent, itemState> {
   final _apiServiceProvider = ApiServiceProvider();
-  List cartHistory = [];
+  List purchaseHistory = [];
   itemBloc() : super(itemInitialState()) {
     on<GetDataButtonPressed>((event, emit) async {
       emit(itemLoadingState());
       final activity = await _apiServiceProvider.fetchActivity();
-      emit(itemSuccessState(activity!, cartHistory));
+      emit(itemSuccessState(activity!, purchaseHistory));
       // print(activity);
     });
-    on<CartHistoryEvent>((event, emit) => {cartHistory.add(event.data)});
+    on<PurchaseHistoryEvent>(
+        (event, emit) => {purchaseHistory.add(event.data)});
   }
 }

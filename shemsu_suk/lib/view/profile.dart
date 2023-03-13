@@ -67,7 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.only(bottom: 15),
               decoration: const BoxDecoration(
-                  color: Colors.amber,
+                  color: Color.fromARGB(255, 19, 18, 17),
                   image: DecorationImage(
                       colorFilter: ColorFilter.mode(
                           Color.fromRGBO(0, 0, 0, 0.753), BlendMode.darken),

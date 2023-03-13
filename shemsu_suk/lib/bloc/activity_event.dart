@@ -4,14 +4,13 @@ import 'package:shemsu_suk/model/item.dart';
 abstract class itemEvent extends Equatable {}
 
 class GetDataButtonPressed extends itemEvent {
-
   @override
   List<Object> get props => [];
 }
 
-class CartHistoryEvent extends itemEvent {
+class PurchaseHistoryEvent extends itemEvent {
   final item asbeza;
-  CartHistoryEvent({required this.asbeza});
+  PurchaseHistoryEvent({required this.asbeza});
 
   @override
   List<Object> get props => [];

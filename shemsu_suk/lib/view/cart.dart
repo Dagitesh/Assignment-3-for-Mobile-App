@@ -5,14 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shemsu_suk/bloc/activity_blocc.dart';
 import 'package:shemsu_suk/bloc/activity_state.dart';
 
-class CartPage extends StatefulWidget {
-  CartPage({super.key});
+class cart extends StatefulWidget {
+  cart({super.key});
 
   @override
-  State<CartPage> createState() => _CartPageState();
+  State<cart> createState() => _CartState();
 }
 
-class _CartPageState extends State<CartPage> {
+class _CartState extends State<cart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +23,7 @@ class _CartPageState extends State<CartPage> {
           ),
           foregroundColor: Color.fromARGB(255, 255, 255, 255),
           backgroundColor: Color.fromARGB(255, 126, 111, 190)),
-      backgroundColor: Color.fromARGB(255, 84, 184, 126),
+      backgroundColor: Color.fromARGB(255, 161, 233, 199),
       body: BlocBuilder<itemBloc, itemState>(
         builder: (context, state) {
           if (state is itemInitialState) {
@@ -43,22 +43,22 @@ class _CartPageState extends State<CartPage> {
               child: CircularProgressIndicator(),
             );
           } else if (state is itemSuccessState) {
-            if (state.cartHistory.isEmpty) {
+            if (state.purchaseHistory.isEmpty) {
               return const Center(
                   child: Text(
                 "NO Purchase\n TOTAL: 0\$",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                ),
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black),
               ));
             } else {
               // ignore: non_constant_identifier_names
               num TotalPrice = 0;
               // ignore: no_leading_underscores_for_local_identifiers
               void _incrementCounter() {
-                for (var element in state.cartHistory) {
+                for (var element in state.purchaseHistory) {
                   TotalPrice += element.price;
                 }
               }
@@ -70,9 +70,9 @@ class _CartPageState extends State<CartPage> {
                     margin: const EdgeInsets.only(top: 5),
                     height: MediaQuery.of(context).size.height * .84,
                     child: ListView.builder(
-                      itemCount: state.cartHistory.length,
+                      itemCount: state.purchaseHistory.length,
                       itemBuilder: (BuildContext context, int index) {
-                        final value = state.cartHistory[index];
+                        final value = state.purchaseHistory[index];
                         return Column(
                           children: [
                             Row(
@@ -92,7 +92,7 @@ class _CartPageState extends State<CartPage> {
                                       width: MediaQuery.of(context).size.width *
                                           .3,
                                       margin: const EdgeInsets.symmetric(
-                                          horizontal: 11, vertical: 5),
+                                          horizontal: 8, vertical: 2),
                                     ),
                                     SizedBox(
                                       width: MediaQuery.of(context).size.width *
@@ -115,7 +115,7 @@ class _CartPageState extends State<CartPage> {
                               ],
                             ),
                             const SizedBox(
-                              height: 30,
+                              height: 10,
                             )
                           ],
                         );
@@ -123,11 +123,11 @@ class _CartPageState extends State<CartPage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: Text(
                       "TOTAL: ${TotalPrice.toStringAsFixed(2)}\$",
                       style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.w300),
+                          fontSize: 15, fontWeight: FontWeight.w900),
                     ),
                   ),
                 ],

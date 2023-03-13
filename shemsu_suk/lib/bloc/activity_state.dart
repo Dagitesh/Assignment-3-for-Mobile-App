@@ -17,11 +17,11 @@ class itemLoadingState extends itemState {
 
 class itemSuccessState extends itemState {
   final List activity;
-  List cartHistory;
+  List purchaseHistory;
 
   itemSuccessState(
     this.activity,
-    this.cartHistory,
+    this.purchaseHistory,
   );
 
   @override
